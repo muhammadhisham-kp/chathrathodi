@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to chathrathodi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #4a8f29;
+            --secondary-color: #f5a623;
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+            --text-color: #555;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #3a7320;
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            margin: 15px auto;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        
+        /* Hero Slider */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            width: 80%;
+        }
+        
+        .slide-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .slide-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* About Section */
+        .about {
+            background: var(--light-color);
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .village-stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            min-width: 150px;
+        }
+        
+        .stat-item i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .stat-item h3 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        
+        /* Places Section */
+        .places {
+            background: white;
+        }
+        
+        .places-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .place-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .place-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .place-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .place-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .place-card:hover .place-img img {
+            transform: scale(1.1);
+        }
+        
+        .place-info {
+            padding: 20px;
+        }
+        
+        .place-info h3 {
+            margin-bottom: 10px;
+        }
+        
+        .place-info p {
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .place-category {
+            display: inline-block;
+            background: var(--light-color);
+            color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            background: var(--light-color);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+        }
+        
+        .gallery-item img, .gallery-item iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Businesses Section */
+        .businesses {
+            background: white;
+        }
+        
+        .business-categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .category-btn {
+            padding: 8px 15px;
+            background: var(--light-color);
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .business-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .business-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .business-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .business-info {
+            padding: 20px;
+            flex-grow: 1;
+        }
+        
+        .business-info h3 {
+            margin-bottom: 10px;
+        }
+        
+        .business-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .business-meta i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        .business-contact {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* People Section */
+        .people {
+            background: var(--light-color);
+        }
+        
+        .people-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .person-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .person-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 5px solid var(--light-color);
+        }
+        
+        .person-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .person-info h3 {
+            margin-bottom: 5px;
+        }
+        
+        .person-role {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .person-bio {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .social-links a {
+            color: var(--dark-color);
+            transition: color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+                .card {
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        /* Services Section */
+        .services {
+            background: white;
+        }
+        
+        .services-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background: var(--light-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .service-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .service-item {
+            background: var(--light-color);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .service-item h3 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-item h3 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .service-meta {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .service-meta span {
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .service-meta i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        /* Visitors Section */
+        .visitors {
+            background: var(--light-color);
+        }
+        
+        .visitor-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .info-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-card h3 i {
+            margin-right: 10px;
+        }
+        
+        .food-item {
+            display: flex;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+                .food-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .food-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .food-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item i {
+            margin-right: 15px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+        
+        .social-media {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-media a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--light-color);
+            color: var(--dark-color);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-media a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        
+        .contact-form textarea {
+            min-height: 150px;
+        }
+        
+        .map-container {
+            height: 400px;
+            margin-top: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: left 0.3s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .slide-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slide-content h1 {
+                font-size: 2rem;
+            }
+            
+            .slide-content p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Chathrathodi</div>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#places">Places</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#businesses">Businesses</a></li>
+                    <li><a href="#people">People</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Slider -->
+    <section class="hero" id="home">
+        <div class="slider">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+                <div class="slide-content">
+                    <h1>Welcome to Chathrathodi</h1>
+                    <p>Discover the beauty, culture, and heritage of our peaceful village</p>
+                    <a href="#about" class="btn">Explore More</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1476231682828-37e571bc172f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');">
+                <div class="slide-content">
+                    <h1>Natural Beauty</h1>
+                    <p>Explore our scenic landscapes, rivers, and countryside</p>
+                    <a href="#places" class="btn">See Places</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">About Our Village</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>History & Origin</h3>
+                    <p>Chathrathodi was established in [1900] by [founders]. The name "Chathrathodi" comes from [explanation of name origin]. Our village has a rich history that spans centuries, with many stories passed down through generations.</p>
+                    <p>The cultural background of our village is a blend of  cultural influences. We take pride in our traditions while embracing modern development.</p>
+                    
+                    <div class="village-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i>
+                            <h3>400+</h3>
+                            <p>Residents</p>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h3>125+</h3>
+                            <p>Years Old</p>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-landmark"></i>
+                            <h3>5+</h3>
+                            <p>Heritage Sites</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Beautiful_image_in_villages_in_india.jpg" alt="Village Overview">
+                </div>
+            </div>
+        </div>
+    </section>z
+
+    <!-- Places Section -->
+    <section class="places" id="places">
+        <div class="container">
+            <h2 class="section-title">Places of Interest</h2>
+            <div class="places-grid">
+                <!-- Temple -->
+                <div class="place-card">
+                    <div class="place-img">
+                        <img src="./Screenshot 2025-05-23 140358.png" alt="Village Temple">
+                    </div>
+                    <div class="place-info">
+                        <span class="place-category">Religious</span>
+                        <h3>Puthoor Cherucholakkara Bhakavathy Temple</h3>
+
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- River -->
+
+                <div class="place-card">
+                    <div class="place-img">
+                        <img src="./Screenshot 2025-05-23 151221.png" alt="Village Temple">
+                    </div>
+                    <div class="place-info">
+                        <span class="place-category">Religious</span>
+                        <h3>Parappil waterfall</h3>
+
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <!-- waterfal -->
+
+
+                <!-- swimmingpool -->
+
+                                <div class="place-card">
+                    <div class="place-img">
+                        <img src="./Screenshot 2025-05-23 151858.png" alt="Village Temple">
+                    </div>
+                    <div class="place-info">
+                        <span class="place-category">Religious</span>
+                        <h3>Konnammakkal Swimmingpool</h3>
+
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+
+
+
+                
+                
+                
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Gallery & Videos</h2>
+            <div class="gallery-grid">
+                <!-- Images -->
+                <div class="gallery-item">
+                    <img src="" alt="Harvest Festival">
+                </div>
+                <div class="gallery-item">
+                    <img src="" alt="Cultural Dance">
+                </div>
+                <div class="gallery-item">
+                    <img src="./Screenshot 2025-05-23 152533.png" alt="">
+                </div>
+                <div class="gallery-item">
+                    <img src="" alt="Traditional Crafts">
+                </div>
+                
+                <!-- Videos -->
+                <div class="gallery-item">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Businesses Section -->
+    <section class="businesses" id="businesses">
+        <div class="container">
+            <h2 class="section-title">Local Businesses & Services</h2>
+            
+            <div class="business-categories">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="shop">Shops</button>
+                <button class="category-btn" data-category="food">Food</button>
+                <button class="category-btn" data-category="service">Services</button>
+                <button class="category-btn" data-category="farm">Farms</button>
+            </div>
+            
+            <div class="business-grid">
+                <!-- Grocery Shop -->
+                <div class="business-card" data-category="shop">
+                    <div class="business-img">
+                        <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Grocery Shop">
+                    </div>
+                    <div class="business-info">
+                        <h3>[Owner's Name] Grocery</h3>
+                        <div class="business-meta">
+                            <i class="fas fa-store"></i>
+                            <span>Grocery & General Store</span>
+                        </div>
+                        <p>Family-run store offering all daily necessities, fresh produce, and household items.</p>
+                        <div class="business-contact">
+                            <i class="fas fa-phone"></i> +91 XXXX XXX XXX
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                <!-- Tailor -->
+                <div class="business-card" data-category="service">
+                    <div class="business-img">
+                        <img src="https://images.unsplash.com/photo-1598706643923-8265daa598a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tailor Shop">
+                    </div>
+                    <div class="business-info">
+                        <h3>[Tailor's Name] Tailoring</h3>
+                        <div class="business-meta">
+                            <i class="fas fa-cut"></i>
+                            <span>Clothing & Alterations</span>
+                        </div>
+                        <p>Expert tailoring services for traditional and modern clothing with quick turnaround.</p>
+                        <div class="business-contact">
+                            <i class="fas fa-phone"></i> +91 XXXX XXX XXX
+                        </div>
+                    </div>
+                </div>
+                
+               
+                
+               
+                
+                <!-- Tea Stall -->
+                <div class="business-card" data-category="food">
+                    <div class="business-img">
+                        <img src="https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tea Stall">
+                    </div>
+                    <div class="business-info">
+                        <h3>[Owner's Name] Tea Stall</h3>
+                        <div class="business-meta">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>Snacks & Beverages</span>
+                        </div>
+                        <p>The village gathering spot for tea, snacks, and lively conversations.</p>
+                        <div class="business-contact">
+                            <i class="fas fa-phone"></i> +91 XXXX XXX XXX
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section -->
+   
+    
+   <!-- Notable People -->
+    <section id="people" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Notable People</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card person-card h-100">
+                        <div class="card-body">
+                            <img src=""
+                                alt="Person" class="person-img">
+                            <h5 class="card-title">Abdulkalam Master</h5>
+                            <p class="card-text text-muted">Block Member </p>
+                            <p class="card-text">He was the the president of peruvallur grama panchayat
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card person-card h-100">
+                        <div class="card-body">
+                            <img src="https://lsgkerala.gov.in/electionupdates/uploads/photos/2020096302001.jpg"
+                                alt="Person" class="person-img">
+                            <h5 class="card-title">Sankaran Chalil</h5>
+                            <p class="card-text text-muted">Division Member</p>
+                            <p class="card-text">Working as a division member for the progress of the village</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card person-card h-100">
+                        <div class="card-body">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTseBHTIpKcTn8gJDGMpT_e5bsRvmY_hbgXAw&s"
+                                alt="Person" class="person-img">
+                            <h5 class="card-title">Shamsudheen Cheruvadi</h5>
+                            <p class="card-text text-muted">Politician and teacher</p>
+                            <p class="card-text">Great Politician and Working as a teacher in village school.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Local Facilities -->
+    <section id="facilities" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Local Facilities</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-school me-2"></i>Schools</h5>
+                            <div class="facility-item">
+                                <h6>Government LP School</h6>
+                                <p class="mb-1">Primary education (1st to 4th standard)</p>
+                                <p class="mb-1"><i class="fas fa-clock me-2"></i>9:00 AM - 4:00 PM (Mon-Fri)</p>
+                                <p class="mb-0"><i class="fas fa-phone me-2"></i>+91 97446 68899</p>
+                            </div>
+                            <div class="facility-item">
+                                <h6>Thottasseriara Upper Primary School</h6>
+                                <p class="mb-1">5th to 7th standard (State syllabus)</p>
+                                <p class="mb-1"><i class="fas fa-clock me-2"></i>9:30 AM - 4:30 PM (Mon-Sat)</p>
+                                <p class="mb-0"><i class="fas fa-phone me-2"></i>+91 9876543221</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-hospital me-2"></i>Healthcare</h5>
+                            <div class="facility-item">
+                                <h6>Al-Madeena Poly clinic</h6>
+                                <p class="mb-1">Basic healthcare services and emergency care</p>
+                                <p class="mb-1"><i class="fas fa-clock me-2"></i>24/7 Emergency, OPD: 8AM-9AM</p>
+                                <p class="mb-0"><i class="fas fa-phone me-2"></i>+91 82811 07333</p>
+                            </div>
+                            <div class="facility-item">
+                                <h6>Village Pharmacy</h6>
+                                <p class="mb-1">Al-Madeena Pharmacy/p>
+                                <p class="mb-1"><i class="fas fa-clock me-2"></i>8:00 AM - 9:00 PM (Daily)</p>
+                                <p class="mb-0"><i class="fas fa-phone me-2"></i>+91 82811 07333</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-money-bill-wave me-2"></i>Banking</h5>
+                            <div class="facility-item">
+                                <h6>Kottakkal Co-operative Bank - Thottasseriara Branch</h6>
+                                <p class="mb-1">Full-service bank with ATM facility</p>
+                                <p class="mb-1"><i class="fas fa-clock me-2"></i>10:00 AM - 4:00 PM (Mon-Fri), 10AM-1PM
+                                    (Sat)</p>
+                                <p class="mb-0"><i class="fas fa-phone me-2"></i>+91 91889 22823</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title"><i class="fas fa-envelope me-2"></i>Post Office</h5>
+                            <div class="facility-item">
+                                <h6>Kannamangalam West Post Office</h6>
+                                <p class="mb-1">Postal services, savings accounts, and money orders</p>
+                                <p class="mb-1"><i class="fas fa-clock me-2"></i>10:00 AM - 2:00 PM (Mon-Sat)</p>
+                                <p class="mb-0"><i class="fas fa-phone me-2"></i>+91 99474 92231</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>Have questions about our village or planning to visit? Reach out to us through any of these channels.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Address</h4>
+                                <p>manattipparambu, Tirurangadi <br>
+                                malappuram, kerala<br>
+                                India - 676304</p>
+                            </div>
+                        </div>
+                       
+                       
+                    </div>
+                    
+                    <h3>Follow Us</h3>
+                    <div class="social-media">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/basc_manatti"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+               
+            </div>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d393.29200039084793!2d75.96639510486652!3d11.044335285308623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba64ced09a69773%3A0x6ac24b57d90d6408!2sManatti%2C%20Vengara%20-%20Muthalamada%20Rd%2C%20Valiyora%2C%20Kerala%20676304!5e0!3m2!1sen!2sin!4v1747286392847!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>manattipparambu</h3>
+                    <p>A peaceful village with rich heritage and natural beauty. Come experience our culture and hospitality.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#places">Places</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#businesses">Businesses</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Education</a></li>
+                        <li><a href="#services">Healthcare</a></li>
+                        <li><a href="#services">Financial</a></li>
+                        <li><a href="#services">Public Services</a></li>
+                        <li><a href="#visitors">Visitor Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+91XXXXXXXXXX"><i class="fas fa-phone"></i> +91 XXXX XXX XXX</a></li>
+                        <li><a href="mailto:contact@[villagename].in"><i class="fas fa-envelope"></i> contact@[villagename].in</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> [Village Address]</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 manattipparambu. All Rights Reserved. | Designed with ❤️ for our village</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Smooth Scrolling for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+        
+        // Image Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+        
+        // Change slide every 5 seconds
+        setInterval(nextSlide, 5000);
+        
+        // Business Category Filter
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const businessCards = document.querySelectorAll('.business-card');
+        
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                categoryBtns.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                // Filter business cards
+                businessCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Services Tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
